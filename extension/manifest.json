@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "LexGuard Legal Assistant",
+  "version": "1.0",
+  "description": "Analyzes legal agreements to highlight critical risks instantly.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Analyze with LexGuard"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "<all_urls>"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

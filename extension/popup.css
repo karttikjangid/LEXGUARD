@@ -1,0 +1,89 @@
+:root {
+    --md-sys-color-primary: #3f51b5;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-background: #f8f9fa;
+    --md-sys-color-on-background: #1c1b1f;
+    --md-sys-color-error: #b3261e;
+}
+
+body {
+    width: 400px;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+}
+
+.popup-container {
+    padding: 0;
+}
+
+header {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    padding: 16px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+main {
+    padding: 24px;
+    text-align: center;
+}
+
+main p {
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+.btn-primary:hover {
+    background-color: #303f9f;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.error-text {
+    color: var(--md-sys-color-error);
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.spinner {
+    border: 3px solid rgba(0,0,0,0.1);
+    border-top: 3px solid var(--md-sys-color-primary);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto 10px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

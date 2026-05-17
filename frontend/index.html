@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexGuard - Legal Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-bar">
+        <div class="app-bar-content">
+            <span class="material-symbols-outlined logo-icon">gavel</span>
+            <h1 class="app-title">LexGuard</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Upload Section -->
+        <section id="upload-section" class="card upload-card">
+            <div class="upload-zone" id="drop-zone">
+                <span class="material-symbols-outlined upload-icon">cloud_upload</span>
+                <h2>Drag & Drop your contract here</h2>
+                <p>Supports .pdf, .docx, and .txt files</p>
+                <input type="file" id="file-input" accept=".pdf,.docx,.txt" hidden>
+                <button class="btn btn-primary" id="browse-btn">Browse Files</button>
+            </div>
+            <div id="loading-spinner" class="spinner-container hidden">
+                <div class="spinner"></div>
+                <p>Analyzing contract...</p>
+            </div>
+            <div id="error-message" class="error-container hidden">
+                <span class="material-symbols-outlined error-icon">error</span>
+                <p id="error-text">An error occurred.</p>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section id="result-section" class="hidden">
+            <div class="dashboard-header">
+                <h2>Analysis Dashboard</h2>
+                <div class="score-card card" id="overall-score-card">
+                    <span class="score-label">Overall Risk Score</span>
+                    <span class="score-value" id="overall-score-value">--/10</span>
+                </div>
+            </div>
+
+            <div class="executive-summary card">
+                <h3>Executive Summary</h3>
+                <p id="executive-summary-text"></p>
+            </div>
+
+            <div class="risk-cards-container" id="risk-cards-container">
+                <!-- Clause cards will be injected here -->
+            </div>
+            
+            <button class="btn btn-secondary mt-20" id="reset-btn">Analyze Another Document</button>
+        </section>
+    </main>
+
+    <!-- Template for Risk Card -->
+    <template id="risk-card-template">
+        <div class="card risk-card">
+            <div class="risk-card-header">
+                <span class="risk-category"></span>
+                <span class="risk-severity-badge"></span>
+            </div>
+            <div class="risk-card-body">
+                <h3 class="risk-explanation"></h3>
+                <p class="risk-recommendation"></p>
+                
+                <details class="risk-original-text-accordion">
+                    <summary>View Original Text</summary>
+                    <div class="original-text-content"></div>
+                </details>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

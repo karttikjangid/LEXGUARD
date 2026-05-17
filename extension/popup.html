@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexGuard Popup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header>
+            <h1>LexGuard</h1>
+        </header>
+        <main>
+            <p>Ready to analyze the current page's legal terms.</p>
+            <button id="analyze-btn" class="btn btn-primary">Analyze Page Terms</button>
+            
+            <div id="status-message" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing... please wait.</p>
+            </div>
+            <div id="error-message" class="hidden error-text">
+                <!-- Errors injected here -->
+            </div>
+        </main>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+instructor[google-genai]
+google-genai
+pymupdf
+pymupdf4llm
+pinecone
+beautifulsoup4
+python-docx
+python-dotenv   
