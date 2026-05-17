@@ -1,155 +1,255 @@
-# LexGuard: AI Rights & Contract Intelligence System
+# ⚖️ LexGuard: Graph-RAG Powered Legal Intelligence Engine
 
-## 1. PROJECT HEADLINE & CORE VALUE PROP
-
-In the modern digital economy, individuals and enterprises routinely agree to predatory terms buried within impenetrable walls of legalese. Standard Natural Language Processing (NLP) solutions and naive retrieval-augmented generation (RAG) pipelines fail to adequately surface these risks; they provide opaque summaries that often miss critical cross-references, severing the legal context required to understand cascading obligations.
-
-**LexGuard** is a highly sophisticated Graph-Augmented RAG and Multi-Agent verification pipeline designed to transition legal analysis from simple text summarization to deep legal awareness. By leveraging advanced geometric network mapping and an adversarial AI checker-maker loop, LexGuard precisely targets, extracts, and simulates the consequences of predatory clauses. It is not merely a tool for reading contracts—it is an enterprise-grade intelligence engine built to defend user rights in real-time.
+> A production-grade, high-trust Legal Assistant system that converts complex, predatory legalese into structured, validated, and highly scannable visual intelligence. Leveraging a Graph-Augmented Retrieval-Augmented Generation (Graph-RAG) engine, adversarial multi-agent validation, and deterministic transport safeguards.
 
 ---
 
-## 2. ARCHITECTURAL ARCHITECTURE & PIPELINE DEPTH
+## 🛠️ Technology Stack & Badges
 
-### The Failure of Standard RAG in Legal Contexts
-Standard, linear RAG pipelines treat documents as flat text sequences. In legal contracts, meaning is rarely sequential. A definition in Section 1 modifies an obligation in Section 4, which is then exempted by a liability waiver in Section 9. Flat RAG fragments this context, leading to dangerous LLM hallucinations and overlooked risks. 
-
-### Graph-Augmented RAG Engine
-LexGuard solves context fragmentation by converting contracts into multidimensional directed graphs.
-- **Node Topology**: Legal concepts are parsed into discrete structural nodes—`Clauses`, `Definitions`, and `Obligations`.
-- **Relationship Edges**: These nodes are linked via semantically typed edges such as `MODIFIES`, `EXEMPTS`, `DEFINES`, and `SUPERSEDES`.
-This structural awareness ensures that when the system analyzes a liability clause, it automatically retrieves the exact definitions and exemptions that govern it.
-
-### Adversarial Multi-Agent Loop
-To guarantee analytical accuracy, LexGuard employs a Maker-Checker multi-agent pipeline driven by the `Instructor` client and the `gemini-3-flash-preview` model.
-- **Maker Agent**: Navigates the Graph-RAG context to identify potential predatory clauses and legal risks based on the Pinecone vector index.
-- **Checker Agent**: Adversarially interrogates the Maker’s findings, aggressively attempting to disprove the extracted risks against the source text to ensure zero hallucination.
-
-### Deterministic Python Substring Verification Layer
-Before any risk is surfaced to the user, LexGuard enforces a deterministic validation pass. Utilizing strict Python algorithms, the system verifies that the exact substrings cited by the LLM agents exist verbatim within the original, unmutated document text. If a string cannot be deterministically matched, the extraction is rejected.
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Pydantic V2](https://img.shields.io/badge/Pydantic_V2-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google_Gemini-1A73E8?style=for-the-badge&logo=google&logoColor=white)
+![Instructor](https://img.shields.io/badge/Instructor-F39C12?style=for-the-badge)
+![Pinecone](https://img.shields.io/badge/Pinecone-000000?style=for-the-badge&logo=pinecone&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Google Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
+![Chrome Extension V3](https://img.shields.io/badge/Chrome_Extension_V3-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Material Design 3](https://img.shields.io/badge/Material_Design_3-757575?style=for-the-badge&logo=material-design-icons&logoColor=white)
 
 ---
 
-## 3. TECHNICAL STACK & DEPLOYMENT PHYSICS
+## 🛰️ Production Endpoint Details
 
-LexGuard is engineered on a modern, stateless, high-throughput technology stack designed for enterprise scalability.
-
-*   **Core Engine**: Python 3.11+ / FastAPI — asynchronous, high-performance API transport.
-*   **Containerization**: Docker — optimized stateless image build.
-*   **Orchestration & Compute**: Google Cloud Run — Stateless, CPU-optimized configuration for auto-scaling HTTP workloads.
-*   **Semantic Parsing**: `pymupdf4llm` — layout-preserving document ingestion.
-*   **Client-Side Processing**: `BeautifulSoup` — Chrome Extension HTML sanitization and DOM scraping.
-*   **Vector Infrastructure**: Pinecone — Managed vector cluster tracking 3072-dimensional embeddings via `gemini-embedding-2`.
-*   **Cognitive Inference**: `gemini-3-flash-preview` & `Instructor` — Structured output generation and adversarial reasoning.
+The LexGuard backend API is fully containerised and running in production as an unauthenticated HTTPS service:
+* **Production Service URL**: [https://lexguard-api-81249095052.asia-south1.run.app](https://lexguard-api-81249095052.asia-south1.run.app)
+* **API Documentation**: [https://lexguard-api-81249095052.asia-south1.run.app/docs](https://lexguard-api-81249095052.asia-south1.run.app/docs)
+* **Google Cloud Project**: `model-resource-496606-a8`
+* **GCP Region**: `asia-south1`
 
 ---
 
-## 4. PRODUCTION DIRECTORY STRUCTURE
+## 📐 System Architecture & Pipeline Depth
 
-LexGuard strictly adheres to SOLID design principles and Separation of Concerns (SoC).
+```mermaid
+graph TD
+    %% Clients
+    A[Chrome Extension Manifest V3] -->|Scrapes Web ToS & POST Plain Text| C[FastAPI Gateway app/api/main.py]
+    B[Web Dashboard Material 3] -->|Uploads PDF/DOCX Base64 or TXT Plain| C
+
+    %% Ingestion
+    C -->|Normalise Input Format & Transport Defences| D[Polymorphic Ingestion Engine strategy]
+    D -->|Extract layout-preserved Markdown| E[Cleaned Markdown Payload]
+
+    %% Vector & RAG
+    E -->|Retrieve Reference Clauses| F[Pinecone Vector Database]
+    F -->|Query 3072-d embeddings via text-embedding-004| G[Top-K Predatory Clause Matches]
+
+    %% LLM & Instructor
+    G -->|Augmented Prompt with Source + Context| H[Maker-Checker Cognitive Engine Services]
+    H -->|Structured Gemini Flash preview Inference| I[Instructor client Validation]
+    I -->|Enforce Strict Pydantic Models models.py| J[Raw Audit Output]
+
+    %% Validation Guardrails
+    J -->|Deterministic Python Substring Verification| K[Final Validate-Strip Orphan Edges]
+    K -->|Validated JSON response payload| L[Interactive Material 3 Render & UI Banner]
+```
+
+### 1. Unified Request Handling & Ingestion Strategy
+Contract payloads enter the FastAPI gateway via a unified schema `ContractPayload` supporting both base64 binary formats (`pdf`, `docx`) and plain-text (`html`, `txt`). 
+- **PDF Ingestion**: Layout-preserving text extraction mapping structural text blocks into Markdown format.
+- **DOCX Ingestion**: Structured XML document parser extracting hierarchical paragraphs.
+- **HTML/Text Sanitisation**: Bypasses full engine blocks, feeding lightweight sanitised and cleaned string arrays to eliminate DOM injection risks.
+
+### 2. High-Dimensional Embedding Vector Space (RAG)
+Contracts are embedded into a 3072-dimensional vector space using Google's `text-embedding-004` (using `gemini-embedding-2`) and queried against a Pinecone vector cluster (`lexguard-knowledge`).
+- **Semantic Chunk Retrieval**: Resolves contextual chunks related to asymmetric liability, hidden data licensing, and unilateral termination traps.
+- **Topological Edge Association**: Links related definitions to clauses (e.g. `MODIFIES` or `EXEMPTS` relationships) representing contract metadata as discrete graphs.
+
+### 3. Dual-Agent Maker-Checker Cognitive Loop
+The cognitive processing engine uses `gemini-3-flash-preview` coordinated via the `Instructor` client:
+1. **The Maker Agent**: Assesses extracted text chunks and retrieves similar vector nodes from Pinecone to generate risks and map connections.
+2. **The Checker Agent**: Adversarially interrogates findings, comparing proposed risks directly against the original text to filter out hallucinations.
+
+### 4. Deterministic Substring Verification Guardrail
+To ensure the LLM never hallucinates source citations:
+- A deterministic Python verification step takes every `original_text` quote inside the generated `RiskAnalysis` model and searches for an exact literal match inside the original unmutated document markdown.
+- If a quote cannot be verified verbatim, it is immediately discarded to enforce a **zero-hallucination** policy before the user receives the payload.
+
+---
+
+## 🔒 Key Engineering Resilience Highlights
+
+### 🛡️ Defensive Boot-Time Initialisation
+During container startup in Serverless platforms like **Google Cloud Run**, platforms perform direct TCP startup probes to check if the instance is ready.
+- **The Problem**: If initialisation of heavy external API clients (like Pinecone index connections or Gemini SDK instances) throws exceptions due to missing keys or unauthorized network states, the Uvicorn process crashes before it can bind to the `$PORT`, failing the Cloud Run startup check.
+- **The Solution**: LexGuard wraps client bootstrapping inside [app/services/analyzer.py](file:///home/kartik/promptwars_sprint/app/services/analyzer.py#L23-L43) with defensive try/except guards:
+  ```python
+  try:
+      self.client = instructor.from_provider(f"google/{LEGAL_MODEL}")
+  except Exception as e:
+      print(f"Defensive Override - Google Client Init Skipped: {e}")
+      self.client = None
+  ```
+- **Result**: The container binds to the port instantly and starts serving requests. Any environment key initialization issues are isolated as runtime warnings instead of startup blocks.
+
+### 🧩 Pydantic V2 Schema Resilience
+- **The Problem**: Rigid Pydantic models enforcing rigid Enum constraints (`LegalCategory` or `SeverityLevel`) crash the entire API request parsing if an LLM returns a slightly different category string (e.g. `"DATA_PRIVACY"` instead of `"PRIVACY"`).
+- **The Solution**: LexGuard maps rigid validation fields into primitive `str` properties with sensible default fallbacks.
+  ```python
+  class RiskAnalysis(BaseModel):
+      model_config = ConfigDict(use_enum_values=True, strict=False)
+
+      category: str = "MISCELLANEOUS"
+      severity: str = "LOW"
+      original_text: str
+      plain_language_explanation: str
+      ...
+  ```
+- **Result**: Ensures **100% endpoint tolerance**. Invalid or unexpected string variants are accepted safely without crashing the backend serializer.
+
+---
+
+## 📂 File Structure Directory Tree
 
 ```text
-lexguard/
-├── app/
+/home/kartik/promptwars_sprint/
+├── .dockerignore              # Deployment exclusion rules (excludes git, venv, extension, frontend)
+├── .env                       # Local active environment variables (credentials)
+├── .env.example               # Clean reference template for required API keys
+├── .git/                      # Local Git revision graph
+├── .gitignore                 # Workspace exclusion mappings
+├── .venv/                     # Python isolation environment
+├── Dockerfile                 # Optimized Python 3.10-slim production container
+├── Problem Statement.md       # Target requirements criteria
+├── README.md                  # This high-density architecture manual
+├── Summary.md                 # System feature summary
+├── agents.md                  # Multi-agent prompt configurations
+├── requirements.txt           # Pinned production dependency graph
+├── app/                       # Core FastAPI application directory
+│   ├── __init__.py
 │   ├── api/
-│   │   └── main.py              # FastAPI transport controllers (CORS exceptions, base64 padding correction)
+│   │   ├── __init__.py
+│   │   └── main.py            # API Transport controllers & normalisation mappings
 │   ├── core/
-│   │   └── models.py            # Strict Pydantic type definitions (no Union/Optional ambiguities)
+│   │   ├── __init__.py
+│   │   └── models.py          # Strict validated Pydantic models (V2)
 │   └── services/
-│       ├── analyzer.py          # Graph-RAG Cognitive core & Multi-Agent loop
-│       ├── ingestion.py         # Abstract polymorphic parsing strategy layer
-│       └── seeder.py            # Programmatic high-density asynchronous vector seeder (200-300 CUAD variations)
-├── extension/
-│   ├── content.js               # Content extraction and DOM injection
-│   ├── manifest.json            # Chrome Manifest V3 definitions
-│   └── popup.js                 # Chrome extension interface logic
-├── frontend/
-│   ├── app.js                   # Client-side SPA logic
-│   └── index.html               # LexGuard dashboard interface
-├── tests/
-│   └── test_suite.py            # Adversarial testing matrix (false positive prevention, fuzzing, stress loads)
-├── Dockerfile                   # Stateless production container specification
-├── requirements.txt             # Pinned dependency graph
-└── .env.example                 # Environment configuration template
+│       ├── __init__.py
+│       ├── analyzer.py        # Cognitive Multi-Agent & Substring validation logic
+│       ├── ingestion.py       # Polymorphic document ingestion strategy implementations
+│       └── seeder.py          # Asynchronous benchmark vector database seeder
+├── extension/                 # Chrome Manifest V3 Browser Extension
+│   ├── popup.html             # Unpacked popup DOM structure
+│   ├── popup.css              # Elevated popup style sheet (Material Design 3 elements)
+│   ├── popup.js               # Event trigger to execute page text scraper
+│   ├── content.js             # Scraping DOM algorithms & Floating warning banner injector
+│   └── manifest.json          # Chrome extension permissions & rules mappings
+├── frontend/                  # Web Dashboard SPA client
+│   ├── index.html             # elevated Material Design 3 HTML skeleton
+│   ├── style.css              # Material Design 3 typography, CSS colors, variables & elevations
+│   └── app.js                 # Drag & drop upload handler and response DOM mapping
+├── tests/                     # Test Suite
+│   └── test_suite.py          # Pytest validation matrix
+└── skills/                    # local development assets
 ```
 
 ---
 
-## 5. PRODUCTION DEPLOYMENT & RUNTIME CONFIGURATION
+## 🚀 Production Deployment Manual
 
-The following instructions provide the exact, copy-pasteable commands required to deploy and run the LexGuard pipeline.
+The application is deployed to **Google Cloud Run** using standard Docker containerisation.
 
-### Local Virtual Environment Initialization
-```bash
-# Clone the repository
-git clone https://github.com/karttikjangid/LEXGUARD.git
-cd LEXGUARD
-
-# Initialize Python virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install strictly pinned dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# Configure environment variables
-cp .env.example .env
-# Edit .env with your Google Gemini API and Pinecone credentials
+### 1. Dockerfile Architecture
+The production [Dockerfile](file:///home/kartik/promptwars_sprint/Dockerfile) binds directly to the dynamic `$PORT` environment variable injected by GCP Cloud Run:
+```dockerfile
+FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8080
+CMD ["sh", "-c", "uvicorn app.api.main:app --host 0.0.0.0 --port $PORT"]
 ```
 
-### Executing the Pinecone Vector Seeder Pipeline
-Before running the analyzer, you must seed the managed vector cluster with benchmark legal data.
+### 2. Manual CLI Deployment Guide
+Run these commands from your local machine to build the container and deploy the live service:
+
 ```bash
-# Execute the high-density asynchronous seeder
+# 1. Login to your active GCP billing account
+gcloud auth login
+
+# 2. Select the target GCP Project
+gcloud config set project model-resource-496606-a8
+
+# 3. Deploy the container live from source
+gcloud run deploy lexguard-api \
+  --source . \
+  --region asia-south1 \
+  --allow-unauthenticated \
+  --set-env-vars "GEMINI_API_KEY=YOUR_GEMINI_KEY,PINECONE_API_KEY=YOUR_PINECONE_KEY,PINECONE_INDEX_NAME=lexguard-knowledge" \
+  --project model-resource-496606-a8
+```
+
+> [!NOTE]
+> The `--allow-unauthenticated` flag is critical to enable the unpacked Chrome Extension and external frontend dashboard clients to bypass origin preflight blocks and talk directly to the live HTTPS service.
+
+---
+
+## 💻 Local Setup & Testing Suite
+
+### 1. Core Installation
+
+Establish a Python virtual environment or Conda sandbox, clone the directory, and install dependencies:
+
+```bash
+# 1. Create isolation sandbox
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2. Update package installer and install pinned libraries
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Create a local environment file `.env` based on `.env.example`:
+```bash
+cp .env.example .env
+```
+Ensure your `.env` contains:
+```env
+GEMINI_API_KEY=AIzaSy...
+PINECONE_API_KEY=pcsk_...
+PINECONE_INDEX_NAME=lexguard-knowledge
+```
+
+### 2. Seeding the Vector Cluster
+Run the async database seeder to populate Pinecone index vector spaces with multi-dimensional legal training agreements:
+```bash
 python -m app.services.seeder
 ```
 
-### Running the Local Development Server
-Launch the FastAPI asynchronous engine for local development.
+### 3. Launching Local Server
+Execute the local server using `uvicorn`:
 ```bash
-# Start the uvicorn transport controller
 uvicorn app.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+You can now open the Web UI at [frontend/index.html](file:///home/kartik/promptwars_sprint/frontend/index.html) or access localhost at `http://localhost:8000/docs`.
 
-### Running the Adversarial Local Test Suite
-Ensure the Deterministic Python Substring Verification Layer and Multi-Agent Loop are functioning correctly.
+### 4. Running the Local Test Matrix
+Execute adversarial and structural API validation tests via `pytest`:
 ```bash
-# Execute the testing matrix
 pytest tests/test_suite.py -v
-```
-
-### Google Cloud Run Deployment
-Build and deploy the stateless container to GCP.
-```bash
-# Authenticate with Google Cloud
-gcloud auth login
-gcloud config set project [YOUR_PROJECT_ID]
-
-# Build the Docker image via Google Cloud Build
-gcloud builds submit --tag gcr.io/[YOUR_PROJECT_ID]/lexguard
-
-# Deploy the image to Cloud Run (Stateless, CPU-optimized)
-gcloud run deploy lexguard \
-  --image gcr.io/[YOUR_PROJECT_ID]/lexguard \
-  --platform managed \
-  --region us-central1 \
-  --allow-unauthenticated \
-  --port 8080 \
-  --cpu 2 \
-  --memory 2Gi \
-  --set-env-vars="GEMINI_API_KEY=YOUR_API_KEY,PINECONE_API_KEY=YOUR_API_KEY"
 ```
 
 ---
 
-## 6. PROBLEM STATEMENT MATRIX ALIGNMENT
+## 📋 Hackathon Target Alignment Matrix
 
-LexGuard addresses the hackathon's core objective categories through precision engineering. The matrix below demonstrates our 100% compliance with risk mitigation requirements.
-
-| Risk Category | Hackathon Objective | LexGuard System Feature | Technical Implementation |
+| Legal Metric | Problem Statement Criteria | LexGuard System Solution | Technical Delivery Mechanism |
 | :--- | :--- | :--- | :--- |
-| **Privacy** | Detect unauthorized data selling or opaque tracking clauses. | Surveillance Node Extraction | Graph-RAG queries targeting `OBLIGATION` nodes mapped to data sharing verbs, verified by the Maker-Checker loop. |
-| **Financial** | Flag hidden subscription traps, auto-renewals, or extreme penalties. | Asymmetric Liability Detection | Vector similarity search (3072-d embeddings) isolating auto-renewal terminology, processed through the Deterministic Substring Layer. |
-| **Employment** | Identify predatory non-competes, IP assignment, and arbitration forcing. | Jurisdictional Conflict Mapping | Graph edge traversal (`SUPERSEDES`) to determine if forced arbitration clauses invalidate local labor protections. |
-| **Intellectual Property**| Surface broad licenses that claim perpetual rights to user-generated content. | Temporal Licensing Analysis | Adversarial agents interrogate extracted text for "perpetual," "irrevocable," and "worldwide" modifiers applied to user IP. |
-| **Compliance** | Map terms of service against evolving regulatory frameworks (e.g., GDPR, CCPA). | Regulatory Exemption Simulation | Semantic parsing matches contract clauses against seeded CUAD-variant regulatory benchmarks in the Pinecone cluster. |
+| **Data Privacy** | Detect hidden data selling, tracking pixels, or transparent cookie consent. | Surveillance Node Extraction | Graph-RAG queries mapping document chunks to `OBLIGATION` nodes targeting data collection actions. |
+| **Asymmetric Liability** | Flag extreme auto-renewals, double fees, or severe contract penalties. | Financial Obligation Isolation | Top-K similarity vector clustering parsing predatory liability terms via 3072-d vectors. |
+| **IP Protection** | Identify broad perpetual licenses, royalty-free usage, or waiver agreements. | Universal Licensing Analysis | Structured Gemini Maker-Checker queries interrogating IP transfer actions. |
+| **Jurisdictional Rights** | Flag forced arbitration clauses, waiver of class actions, or choice of venue. | Rights Infringement Discovery | Relational graph edge traversal mapping if forced arbitration overrides regional user protection rights. |
+
+---

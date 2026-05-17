@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.gitignore
+.dockerignore
+extension/
+frontend/
+tests/

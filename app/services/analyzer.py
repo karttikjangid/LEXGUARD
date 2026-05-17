@@ -22,24 +22,34 @@ RAG_QUERY_CHARS = int(os.environ.get("RAG_QUERY_CHARS", "2000"))
 
 class ContractAnalysisEngine:
     def __init__(self):
-        # ── Instructor client (structured-output generation) ───────────────────
-        # from_provider bakes the model into the client; .create() needs no model= arg
-        self.client = instructor.from_provider(f"google/{LEGAL_MODEL}")
+        # Defensively initialize Google/Instructor client
+        try:
+            self.client = instructor.from_provider(f"google/{LEGAL_MODEL}")
+        except Exception as e:
+            print(f"Defensive Override - Google Client Init Skipped: {e}")
+            self.client = None
 
-        # ── Raw GenAI client (embedding only) ─────────────────────────────────
-        self.genai_client = genai.Client()
+        # Defensively initialize Raw GenAI client
+        try:
+            self.genai_client = genai.Client()
+        except Exception as e:
+            print(f"Defensive Override - GenAI Client Init Skipped: {e}")
+            self.genai_client = None
 
-        # ── Pinecone retrieval client ──────────────────────────────────────────
+        # Defensively initialize Pinecone index
         pinecone_api_key   = os.environ.get("PINECONE_API_KEY")
         pinecone_index_name = os.environ.get("PINECONE_INDEX_NAME", "lexguard-knowledge")
-
-        if pinecone_api_key:
-            pc = Pinecone(api_key=pinecone_api_key)
-            self.pc_index = pc.Index(pinecone_index_name)
-            print(f"[RAG] Connected to Pinecone index: {pinecone_index_name}")
-        else:
+        try:
+            if pinecone_api_key:
+                pc = Pinecone(api_key=pinecone_api_key)
+                self.pc_index = pc.Index(pinecone_index_name)
+                print(f"[RAG] Connected to Pinecone index: {pinecone_index_name}")
+            else:
+                self.pc_index = None
+                print("[RAG] WARNING: PINECONE_API_KEY not set — RAG retrieval disabled.")
+        except Exception as e:
+            print(f"Defensive Override - Pinecone Index Init Skipped: {e}")
             self.pc_index = None
-            print("[RAG] WARNING: PINECONE_API_KEY not set — RAG retrieval disabled.")
 
     # ── Private helpers ────────────────────────────────────────────────────────
 

@@ -13,6 +13,7 @@
   ],
   "host_permissions": [
     "http://localhost:8000/*",
+    "https://lexguard-api-81249095052.asia-south1.run.app/*",
     "<all_urls>"
   ],
   "content_security_policy": {

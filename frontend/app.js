@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 source: "web_dashboard"
             };
 
-            const response = await fetch('http://localhost:8000/api/analyze-contract', {
+            const response = await fetch('https://lexguard-api-81249095052.asia-south1.run.app/api/analyze-contract', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
